@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeadingTitleComponent } from './components/heading-title/heading-title.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -32,6 +33,7 @@ import { TransactionsComponent } from './containers/transactions/transactions.co
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,

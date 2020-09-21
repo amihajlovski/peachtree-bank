@@ -1,21 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { IBalance } from '../models/balance';
+import { NavigationEnd, Router } from '@angular/router';
+import { Observable, ReplaySubject } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
+import { IBalance, IBalanceRespone } from '../models/balance';
 import { ITransactionResponse } from '../models/transaction';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private httpClient: HttpClient) {}
+  private currentBalance = new ReplaySubject<IBalance>(1);
+  public currentBalance$ = this.currentBalance.asObservable();
+
+  constructor(private httpClient: HttpClient, private router: Router) {
+    this.router.events
+      .pipe(
+        filter((evt) => evt instanceof NavigationEnd),
+        distinctUntilChanged(),
+        switchMap(() => this.getAccountBalance())
+      )
+      .subscribe((evt) => {
+        this.currentBalance.next(evt);
+      });
+  }
 
   getAccountBalance(): Observable<IBalance> {
-    return of({
-      accountName: 'Free Checking (3692)',
-      amount: 5824.76,
-    });
+    return this.httpClient
+      .get<IBalanceRespone>('/_mocks_/balance.json')
+      .pipe(map((response) => response.data));
   }
 
   getMerchants(): Observable<string[]> {

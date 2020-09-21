@@ -18,9 +18,9 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.balance$ = this.apiService
-      .getAccountBalance()
-      .pipe(takeUntil(this.destroy$));
+    this.balance$ = this.apiService.currentBalance$.pipe(
+      takeUntil(this.destroy$)
+    );
 
     this.merchants$ = this.apiService
       .getMerchants()

@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IBalance } from 'src/app/models/balance';
 
@@ -7,7 +13,7 @@ import { IBalance } from 'src/app/models/balance';
   templateUrl: './transactions-form.component.html',
   styleUrls: ['./transactions-form.component.scss'],
 })
-export class TransactionsFormComponent implements OnInit {
+export class TransactionsFormComponent implements OnInit, OnChanges {
   @Input()
   balance: IBalance;
 
@@ -20,7 +26,7 @@ export class TransactionsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.transferForm = this.formBuilder.group({
-      fromAccount: [`${this.balance.accountName} - $${this.balance.amount}`],
+      fromAccount: [null, Validators.required],
       toAccount: [null, Validators.required],
       amount: [
         null,
@@ -30,5 +36,13 @@ export class TransactionsFormComponent implements OnInit {
         ],
       ],
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.balance?.currentValue) {
+      this.transferForm.patchValue({
+        fromAccount: `${this.balance.accountName} - $${this.balance.amount}`,
+      });
+    }
   }
 }
