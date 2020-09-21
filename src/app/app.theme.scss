@@ -1,0 +1,70 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$peach-tree-blue: (50 : #e2f0f3,
+  100 : #b6dae0,
+  200 : #86c1cb,
+  300 : #55a8b6,
+  400 : #3096a7,
+  500 : #0c8397,
+  600 : #0a7b8f,
+  700 : #087084,
+  800 : #06667a,
+  900 : #035369,
+  A100 : #98e6ff,
+  A200 : #65d9ff,
+  A400 : #32ccff,
+  A700 : #19c6ff,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+
+$peach-tree-orange: (50 : #fdeee7,
+  100 : #fad4c2,
+  200 : #f7b899,
+  300 : #f39b70,
+  400 : #f18552,
+  500 : #ee7033,
+  600 : #ec682e,
+  700 : #e95d27,
+  800 : #e75320,
+  900 : #e24114,
+  A100 : #ffffff,
+  A200 : #ffe5df,
+  A400 : #ffbbac,
+  A700 : #ffa692,
+  contrast: (50 : #ffffff,
+    100 : #ffffff,
+    200 : #ffffff,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  ));
+
+$peach-tree-palette-primary: mat-palette($peach-tree-blue);
+$peach-tree-palette-accent: mat-palette($peach-tree-orange);
+
+$peach-tree-theme: mat-light-theme($peach-tree-palette-primary, $peach-tree-palette-accent);
+
+@include angular-material-theme($peach-tree-theme);

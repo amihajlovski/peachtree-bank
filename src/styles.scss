@@ -4,4 +4,18 @@
 html,
 body {
   font-family: 'Kanit';
+  background-image: url('./assets/images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
