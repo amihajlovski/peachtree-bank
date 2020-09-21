@@ -1,8 +1,5 @@
 <div class="container">
-  <div class="heading">
-    <mat-icon class="icon">loop</mat-icon>
-    <p>Make a Transfer</p>
-  </div>
+  <app-heading-title [title]="'Make a Transfer'" [icon]="'loop'"></app-heading-title>
   <div class="form" [formGroup]="transferForm">
     <div class="form-control">
       <label>From account</label>
@@ -22,7 +19,7 @@
     <div class="form-control">
       <label>Amount</label>
       <mat-form-field>
-        <input matInput formControlName="amount" autocomplete="off">
+        <input matInput type="number" formControlName="amount" autocomplete="off">
       </mat-form-field>
     </div>
     <div class="form-actions">

@@ -11,9 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { TransferFormComponent } from './components/transfer-form/transfer-form.component';
+import { HeadingTitleComponent } from './components/heading-title/heading-title.component';
 
 @NgModule({
-  declarations: [AppComponent, LogoComponent, TransferFormComponent],
+  declarations: [AppComponent, LogoComponent, TransferFormComponent, HeadingTitleComponent],
   imports: [
     CommonModule,
     BrowserModule,
