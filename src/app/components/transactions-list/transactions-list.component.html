@@ -13,11 +13,11 @@
       <div class="col">
         <div>
           <p>{{transaction.merchant}}</p>
-          <p>{{transaction.transactionType}}</p>
+          <p class="tr-type">{{transaction.transactionType}}</p>
         </div>
       </div>
       <div class="col right">
-        <p>{{transaction.amount}}</p>
+        <p>{{transaction.amount | currency}}</p>
       </div>
     </div>
   </div>
