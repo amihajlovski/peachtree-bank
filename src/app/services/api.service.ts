@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Observable, ReplaySubject } from 'rxjs';
+import { forkJoin, Observable, ReplaySubject } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IBalance, IBalanceRespone } from '../models/balance';
@@ -11,18 +11,24 @@ import { ITransaction, ITransactionResponse } from '../models/transaction';
   providedIn: 'root',
 })
 export class ApiService {
-  private currentBalance = new ReplaySubject<IBalance>(1);
-  public currentBalance$ = this.currentBalance.asObservable();
+  private balance = new ReplaySubject<IBalance>(1);
+  private transactions = new ReplaySubject<ITransaction[]>(1);
+
+  public currentBalance$ = this.balance.asObservable();
+  public currentTransactions$ = this.transactions.asObservable();
 
   constructor(private httpClient: HttpClient, private router: Router) {
     this.router.events
       .pipe(
         filter((evt) => evt instanceof NavigationEnd),
         distinctUntilChanged(),
-        switchMap(() => this.getAccountBalance())
+        switchMap(() =>
+          forkJoin([this.getAccountBalance(), this.getTransactions()])
+        )
       )
-      .subscribe((evt) => {
-        this.currentBalance.next(evt);
+      .subscribe(([balance, transactions]) => {
+        this.balance.next(balance);
+        this.transactions.next(transactions);
       });
   }
 
