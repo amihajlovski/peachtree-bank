@@ -23,7 +23,8 @@
       </mat-form-field>
     </div>
     <div class="form-actions">
-      <button mat-flat-button color="accent" type="submit" [disabled]="!transactionForm.valid">
+      <button mat-flat-button color="accent" type="submit"
+        [disabled]="!transactionForm.valid || amount > balance.amount - allowedDebt">
         <span>Submit</span>
       </button>
     </div>

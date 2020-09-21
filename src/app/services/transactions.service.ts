@@ -18,13 +18,12 @@ import {
   ITransaction,
   ITransactionResponse,
 } from '../models/transaction';
+import { ALLOWED_DEBT } from '../utils/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransactionsService {
-  private readonly LOWEST_ALLOWED_AMOUNT = -500;
-
   private balance = new ReplaySubject<IBalance>(1);
   private transactions = new ReplaySubject<ITransaction[]>(1);
   private merchants = new ReplaySubject<IMerchant[]>(1);
@@ -82,23 +81,28 @@ export class TransactionsService {
       take(1),
       switchMap(([currentBalance, currentTransactions]) => {
         const newBalance = currentBalance.amount - transaction.amount;
-        if (newBalance > this.LOWEST_ALLOWED_AMOUNT) {
+
+        if (newBalance > ALLOWED_DEBT) {
           const transactionInfo = currentTransactions.find(
             (t) => t.merchant === transaction.toAccount.name
           );
+
           const newTransaction: ITransaction = {
             ...transactionInfo,
             amount: transaction.amount.toString(),
             transactionDate: new Date().getTime(),
             transactionType: 'Online Transfer',
           };
+
           this.balance.next({
             ...currentBalance,
             amount: currentBalance.amount - transaction.amount,
           });
           this.transactions.next([...currentTransactions, newTransaction]);
+
           return of(true);
         }
+
         return of(false);
       })
     );

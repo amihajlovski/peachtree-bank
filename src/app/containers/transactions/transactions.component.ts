@@ -5,6 +5,7 @@ import { IBalance } from 'src/app/models/balance';
 import { IMerchant } from 'src/app/models/merchant';
 import { INewTransaction, ITransaction } from 'src/app/models/transaction';
 import { TransactionsService } from 'src/app/services/transactions.service';
+import { ALLOWED_DEBT } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-transactions',
@@ -17,6 +18,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   transactions$: Observable<ITransaction[]>;
 
   private destroy$ = new ReplaySubject<boolean>(1);
+
+  public allowedDebt = ALLOWED_DEBT;
 
   constructor(private transactionsService: TransactionsService) {}
 

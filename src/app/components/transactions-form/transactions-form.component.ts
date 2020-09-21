@@ -24,6 +24,9 @@ export class TransactionsFormComponent implements OnInit, OnChanges {
   @Input()
   merchants: IMerchant[];
 
+  @Input()
+  allowedDebt: number;
+
   @Output()
   submitForm = new EventEmitter<INewTransaction>();
 
@@ -55,5 +58,9 @@ export class TransactionsFormComponent implements OnInit, OnChanges {
 
   onSubmit(): void {
     this.submitForm.next(this.transactionForm.value);
+  }
+
+  get amount(): number {
+    return this.transactionForm.value.amount;
   }
 }
