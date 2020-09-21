@@ -16,6 +16,7 @@ import { LogoComponent } from './components/logo/logo.component';
 import { TransactionsFormComponent } from './components/transactions-form/transactions-form.component';
 import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
 import { TransactionsComponent } from './containers/transactions/transactions.component';
+import { TransactionsFiltersComponent } from './components/transactions-filters/transactions-filters.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TransactionsComponent } from './containers/transactions/transactions.co
     HeadingTitleComponent,
     TransactionsListComponent,
     TransactionsComponent,
+    TransactionsFiltersComponent,
   ],
   imports: [
     CommonModule,

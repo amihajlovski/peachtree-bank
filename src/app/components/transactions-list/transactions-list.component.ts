@@ -6,11 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transactions-list.component.scss'],
 })
 export class TransactionsListComponent implements OnInit {
-  activeSearch: string;
-
   constructor() {}
 
   ngOnInit(): void {}
-
-  applySearch(): void {}
 }

@@ -1,25 +1,4 @@
 <div class="container">
   <app-heading-title [title]="'Recent Transactions'" [icon]="'work_outline'"></app-heading-title>
-  <div class="filters">
-    <div class="search">
-      <mat-form-field>
-        <mat-label>Search by typing...</mat-label>
-        <input matInput (keyup)="applySearch()" [(ngModel)]="activeSearch" autocomplete="off">
-      </mat-form-field>
-    </div>
-    <div class="sorting">
-      <p class="label">Sort by</p>
-      <div class="options">
-        <div class="option">
-          <p>Date</p>
-        </div>
-        <div class="option">
-          <p>Beneficiary</p>
-        </div>
-        <div class="option">
-          <p>Amount</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-transactions-filters></app-transactions-filters>
 </div>
