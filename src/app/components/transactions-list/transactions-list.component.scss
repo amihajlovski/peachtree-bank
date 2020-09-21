@@ -6,4 +6,42 @@
   flex-direction: column;
   background-color: $white;
   width: 700px;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 24px 0;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 12px;
+      border: 1px solid #e3e3e3;
+      height: 50px;
+
+      .col {
+        display: flex;
+        align-items: center;
+        min-width: 100px;
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .right {
+        margin-left: auto;
+      }
+
+      .gap {
+        margin-left: 12px;
+      }
+    }
+
+    .border-none {
+      border-bottom: none;
+    }
+  }
 }

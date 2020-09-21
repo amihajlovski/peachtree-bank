@@ -3,6 +3,6 @@
     <app-transactions-form [balance]="balance$ | async" [merchants]="merchants$ | async"></app-transactions-form>
   </div>
   <div class="section-right">
-    <app-transactions-list></app-transactions-list>
+    <app-transactions-list [transactions]="transactions$ | async"></app-transactions-list>
   </div>
 </div>

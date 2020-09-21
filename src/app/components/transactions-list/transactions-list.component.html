@@ -1,4 +1,24 @@
 <div class="container">
   <app-heading-title [title]="'Recent Transactions'" [icon]="'work_outline'"></app-heading-title>
   <app-transactions-filters></app-transactions-filters>
+  <div class="list">
+    <div class="item" *ngFor="let transaction of transactions; let last = last" [ngClass]="{'border-none': !last}"
+      [ngStyle]="{'border-left': '10px solid ' + transaction.categoryCode}">
+      <div class="col gap">
+        <p>{{transaction.transactionDate | date: 'MMM. yy'}}</p>
+      </div>
+      <div class="col">
+        <img [src]="transaction.merchantLogo" width="40" height="40" />
+      </div>
+      <div class="col">
+        <div>
+          <p>{{transaction.merchant}}</p>
+          <p>{{transaction.transactionType}}</p>
+        </div>
+      </div>
+      <div class="col right">
+        <p>{{transaction.amount}}</p>
+      </div>
+    </div>
+  </div>
 </div>
