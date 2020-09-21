@@ -119,6 +119,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "peachtree-bank"
+    }
+  },
+  "defaultProject": "peachtree-bank",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
