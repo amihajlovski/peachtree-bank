@@ -11,3 +11,8 @@ body {
   background-repeat: no-repeat;
   background-position-y: bottom;
 }
+
+p,
+span {
+  font-family: $font-family;
+}

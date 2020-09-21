@@ -3,5 +3,32 @@
     <mat-icon class="icon">loop</mat-icon>
     <p>Make a Transfer</p>
   </div>
-  <div class="form"></div>
+  <div class="form" [formGroup]="transferForm">
+    <div class="form-control">
+      <label>From account</label>
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="fromAccount" autocomplete="off" readonly>
+      </mat-form-field>
+    </div>
+    <div class="form-control">
+      <label>To account</label>
+      <mat-form-field>
+        <mat-select>
+          <mat-option>One</mat-option>
+          <mat-option>Two</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-control">
+      <label>Amount</label>
+      <mat-form-field>
+        <input matInput formControlName="amount" autocomplete="off">
+      </mat-form-field>
+    </div>
+    <div class="form-actions">
+      <button mat-flat-button color="accent" type="submit">
+        <span>Submit</span>
+      </button>
+    </div>
+  </div>
 </div>

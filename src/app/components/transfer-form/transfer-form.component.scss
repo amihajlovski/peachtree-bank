@@ -18,12 +18,41 @@
 
     .icon {
       position: absolute;
-      left: 15px;
       color: $light-blue;
+      left: 12px;
     }
 
     p {
       color: $light-blue;
     }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 12px 0;
+
+    .form-control {
+      width: 100%;
+
+      .mat-form-field {
+        display: flex;
+        flex-direction: column;
+        padding: 0 12px;
+      }
+
+      label {
+        padding: 0 12px;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 12px;
+    }
+
   }
 }

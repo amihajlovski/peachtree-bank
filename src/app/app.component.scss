@@ -8,3 +8,8 @@
   background-color: $white;
   border-bottom: 3px solid $accent;
 }
+
+.container {
+  display: flex;
+  padding: 24px;
+}
