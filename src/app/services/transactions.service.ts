@@ -10,7 +10,7 @@ import { ITransaction, ITransactionResponse } from '../models/transaction';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class TransactionsService {
   private balance = new ReplaySubject<IBalance>(1);
   private transactions = new ReplaySubject<ITransaction[]>(1);
 

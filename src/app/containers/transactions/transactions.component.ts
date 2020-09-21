@@ -3,7 +3,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IBalance } from 'src/app/models/balance';
 import { ITransaction } from 'src/app/models/transaction';
-import { ApiService } from 'src/app/services/api.service';
+import { TransactionsService } from 'src/app/services/transactions.service';
 
 @Component({
   selector: 'app-transactions',
@@ -17,18 +17,18 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
   private destroy$ = new ReplaySubject<boolean>(1);
 
-  constructor(private apiService: ApiService) {}
+  constructor(private transactionsService: TransactionsService) {}
 
   ngOnInit(): void {
-    this.balance$ = this.apiService.currentBalance$.pipe(
+    this.balance$ = this.transactionsService.currentBalance$.pipe(
       takeUntil(this.destroy$)
     );
 
-    this.merchants$ = this.apiService
+    this.merchants$ = this.transactionsService
       .getMerchants()
       .pipe(takeUntil(this.destroy$));
 
-    this.transactions$ = this.apiService.currentTransactions$.pipe(
+    this.transactions$ = this.transactionsService.currentTransactions$.pipe(
       takeUntil(this.destroy$)
     );
   }
