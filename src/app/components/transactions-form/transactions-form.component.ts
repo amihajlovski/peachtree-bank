@@ -52,6 +52,8 @@ export class TransactionsFormComponent implements OnInit, OnChanges {
     if (changes.balance?.currentValue) {
       this.transactionForm.patchValue({
         fromAccount: `${this.balance.accountName} - $${this.balance.amount}`,
+        toAccount: null,
+        amount: null,
       });
     }
   }
