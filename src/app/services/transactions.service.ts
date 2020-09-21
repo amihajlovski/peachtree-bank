@@ -96,7 +96,9 @@ export class TransactionsService {
 
           this.balance.next({
             ...currentBalance,
-            amount: currentBalance.amount - transaction.amount,
+            amount: Number(
+              (currentBalance.amount - transaction.amount).toFixed(2)
+            ),
           });
           this.transactions.next([...currentTransactions, newTransaction]);
 
