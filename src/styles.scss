@@ -1,21 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.google.com/specimen/Kanit');
+@import './app/styles/fonts.scss';
 
 html,
 body {
-  font-family: 'Kanit';
+  font-family: $font-family;
+  margin: 0;
+  height: 100%;
   background-image: url('./assets/images/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position-y: bottom;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
