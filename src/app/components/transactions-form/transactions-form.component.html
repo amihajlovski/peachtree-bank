@@ -1,6 +1,6 @@
 <div class="container">
   <app-heading-title [title]="'Make a Transfer'" [icon]="'loop'"></app-heading-title>
-  <div class="form" [formGroup]="transferForm">
+  <form class="form" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
     <div class="form-control">
       <label>From account</label>
       <mat-form-field appearance="fill">
@@ -11,7 +11,7 @@
       <label>To account</label>
       <mat-form-field>
         <mat-select formControlName="toAccount">
-          <mat-option *ngFor="let merchant of merchants" [value]="merchant">{{merchant}}</mat-option>
+          <mat-option *ngFor="let merchant of merchants" [value]="merchant">{{merchant.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -23,9 +23,9 @@
       </mat-form-field>
     </div>
     <div class="form-actions">
-      <button mat-flat-button color="accent" type="submit" [disabled]="!transferForm.valid">
+      <button mat-flat-button color="accent" type="submit" [disabled]="!transactionForm.valid">
         <span>Submit</span>
       </button>
     </div>
-  </div>
+  </form>
 </div>

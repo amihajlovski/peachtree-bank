@@ -1,12 +1,16 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IBalance } from 'src/app/models/balance';
+import { IMerchant } from 'src/app/models/merchant';
+import { INewTransaction } from 'src/app/models/transaction';
 
 @Component({
   selector: 'app-transactions-form',
@@ -18,14 +22,17 @@ export class TransactionsFormComponent implements OnInit, OnChanges {
   balance: IBalance;
 
   @Input()
-  merchants: string[];
+  merchants: IMerchant[];
 
-  transferForm: FormGroup;
+  @Output()
+  submitForm = new EventEmitter<INewTransaction>();
+
+  transactionForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.transferForm = this.formBuilder.group({
+    this.transactionForm = this.formBuilder.group({
       fromAccount: [null, Validators.required],
       toAccount: [null, Validators.required],
       amount: [
@@ -40,9 +47,13 @@ export class TransactionsFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.balance?.currentValue) {
-      this.transferForm.patchValue({
+      this.transactionForm.patchValue({
         fromAccount: `${this.balance.accountName} - $${this.balance.amount}`,
       });
     }
+  }
+
+  onSubmit(): void {
+    this.submitForm.next(this.transactionForm.value);
   }
 }

@@ -1,6 +1,7 @@
 <div class="container">
   <div class="section-left">
-    <app-transactions-form [balance]="balance$ | async" [merchants]="merchants$ | async"></app-transactions-form>
+    <app-transactions-form [balance]="balance$ | async" [merchants]="merchants$ | async"
+      (submitForm)="onNewTransaction($event)"></app-transactions-form>
   </div>
   <div class="section-right">
     <app-transactions-list [transactions]="transactions$ | async"></app-transactions-list>

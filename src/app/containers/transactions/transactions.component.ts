@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { IBalance } from 'src/app/models/balance';
-import { ITransaction } from 'src/app/models/transaction';
+import { IMerchant } from 'src/app/models/merchant';
+import { INewTransaction, ITransaction } from 'src/app/models/transaction';
 import { TransactionsService } from 'src/app/services/transactions.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { TransactionsService } from 'src/app/services/transactions.service';
 })
 export class TransactionsComponent implements OnInit, OnDestroy {
   balance$: Observable<IBalance>;
-  merchants$: Observable<string[]>;
+  merchants$: Observable<IMerchant[]>;
   transactions$: Observable<ITransaction[]>;
 
   private destroy$ = new ReplaySubject<boolean>(1);
@@ -24,9 +25,9 @@ export class TransactionsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     );
 
-    this.merchants$ = this.transactionsService
-      .getMerchants()
-      .pipe(takeUntil(this.destroy$));
+    this.merchants$ = this.transactionsService.merchants$.pipe(
+      takeUntil(this.destroy$)
+    );
 
     this.transactions$ = this.transactionsService.currentTransactions$.pipe(
       takeUntil(this.destroy$)
@@ -36,5 +37,12 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+  }
+
+  onNewTransaction(transaction: INewTransaction): void {
+    this.transactionsService
+      .newTransaction(transaction)
+      .pipe(take(1))
+      .subscribe();
   }
 }

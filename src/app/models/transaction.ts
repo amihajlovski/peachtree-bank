@@ -1,3 +1,5 @@
+import { IMerchant } from './merchant';
+
 export interface ITransaction {
   amount: string;
   categoryCode: string;
@@ -9,6 +11,11 @@ export interface ITransaction {
 
 export interface ITransactionResponse {
   data: ITransaction[];
+}
+
+export interface INewTransaction {
+  toAccount: IMerchant;
+  amount: number;
 }
 
 export type TransactionType =
