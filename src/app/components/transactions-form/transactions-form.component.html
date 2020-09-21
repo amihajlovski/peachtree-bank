@@ -10,7 +10,7 @@
     <div class="form-control">
       <label>To account</label>
       <mat-form-field>
-        <mat-select>
+        <mat-select formControlName="toAccount">
           <mat-option *ngFor="let merchant of merchants" [value]="merchant">{{merchant}}</mat-option>
         </mat-select>
       </mat-form-field>

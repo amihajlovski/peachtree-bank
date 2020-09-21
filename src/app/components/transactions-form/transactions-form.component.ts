@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IBalance } from 'src/app/models/balance';
 
 @Component({
-  selector: 'app-transfer-form',
-  templateUrl: './transfer-form.component.html',
-  styleUrls: ['./transfer-form.component.scss'],
+  selector: 'app-transactions-form',
+  templateUrl: './transactions-form.component.html',
+  styleUrls: ['./transactions-form.component.scss'],
 })
-export class TransferFormComponent implements OnInit {
+export class TransactionsFormComponent implements OnInit {
   @Input()
   balance: IBalance;
 
@@ -22,7 +22,13 @@ export class TransferFormComponent implements OnInit {
     this.transferForm = this.formBuilder.group({
       fromAccount: [`${this.balance.accountName} - $${this.balance.amount}`],
       toAccount: [null, Validators.required],
-      amount: [null, [Validators.required]],
+      amount: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern('^(\\d{1,})(,\\d{1,2})*(\\.\\d{1,2})?$'),
+        ],
+      ],
     });
   }
 }
