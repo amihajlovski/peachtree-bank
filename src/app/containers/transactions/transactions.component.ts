@@ -7,10 +7,11 @@ import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.css'],
+  styleUrls: ['./transactions.component.scss'],
 })
 export class TransactionsComponent implements OnInit, OnDestroy {
   balance$: Observable<IBalance>;
+  merchants$: Observable<string[]>;
 
   private destroy$ = new ReplaySubject<boolean>(1);
 
@@ -19,6 +20,10 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.balance$ = this.apiService
       .getAccountBalance()
+      .pipe(takeUntil(this.destroy$));
+
+    this.merchants$ = this.apiService
+      .getMerchants()
       .pipe(takeUntil(this.destroy$));
   }
 

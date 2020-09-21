@@ -11,6 +11,9 @@ export class TransferFormComponent implements OnInit {
   @Input()
   balance: IBalance;
 
+  @Input()
+  merchants: string[];
+
   transferForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}

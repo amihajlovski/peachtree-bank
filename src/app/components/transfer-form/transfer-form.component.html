@@ -11,8 +11,7 @@
       <label>To account</label>
       <mat-form-field>
         <mat-select>
-          <mat-option>One</mat-option>
-          <mat-option>Two</mat-option>
+          <mat-option *ngFor="let merchant of merchants" [value]="merchant">{{merchant}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

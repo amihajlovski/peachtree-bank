@@ -7,6 +7,10 @@ export interface ITransaction {
   transactionType: TransactionType;
 }
 
+export interface ITransactionResponse {
+  data: ITransaction[];
+}
+
 export type TransactionType =
   | 'Online Transfer'
   | 'Card Payment'
