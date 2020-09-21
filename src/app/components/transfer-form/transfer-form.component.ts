@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IBalance } from 'src/app/models/balance';
 
 @Component({
   selector: 'app-transfer-form',
@@ -7,13 +8,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./transfer-form.component.scss'],
 })
 export class TransferFormComponent implements OnInit {
+  @Input()
+  balance: IBalance;
+
   transferForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.transferForm = this.formBuilder.group({
-      fromAccount: [`Free Checking (3692) - $5824.76`],
+      fromAccount: [`${this.balance.accountName} - $${this.balance.amount}`],
       toAccount: [null, Validators.required],
       amount: [null, [Validators.required]],
     });

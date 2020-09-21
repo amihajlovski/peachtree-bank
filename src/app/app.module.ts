@@ -13,6 +13,7 @@ import { HeadingTitleComponent } from './components/heading-title/heading-title.
 import { LogoComponent } from './components/logo/logo.component';
 import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
 import { TransferFormComponent } from './components/transfer-form/transfer-form.component';
+import { TransactionsComponent } from './containers/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TransferFormComponent } from './components/transfer-form/transfer-form.
     TransferFormComponent,
     HeadingTitleComponent,
     TransactionsListComponent,
+    TransactionsComponent,
   ],
   imports: [
     CommonModule,
