@@ -13,15 +13,9 @@ export class TransferFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.transferForm = this.formBuilder.group({
-      fromAccount: [`Free Checking(3692) - $5000`],
+      fromAccount: [`Free Checking (3692) - $5824.76`],
       toAccount: [null, Validators.required],
-      amount: [
-        null,
-        [
-          Validators.required,
-          Validators.pattern('^(\\d{1,})(,\\d{1,2})*(\\.\\d{1,2})?$'),
-        ],
-      ],
+      amount: [null, [Validators.required]],
     });
   }
 }
