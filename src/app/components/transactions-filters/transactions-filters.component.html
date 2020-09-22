@@ -12,9 +12,9 @@
   <div class="sorting">
     <p class="label">Sort by</p>
     <div class="options">
-      <div class="option" (click)="applySort('date')">
+      <div class="option" (click)="applySort('transactionDate')">
         <p>Date</p>
-        <div *ngIf="activeSort.property === 'date'">
+        <div *ngIf="activeSort.property === 'transactionDate'">
           <mat-icon *ngIf="activeSort.direction === 'desc'">arrow_drop_down</mat-icon>
           <mat-icon *ngIf="activeSort.direction === 'asc'">arrow_drop_up</mat-icon>
         </div>

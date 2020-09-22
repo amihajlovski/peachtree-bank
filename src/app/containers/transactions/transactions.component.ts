@@ -42,7 +42,6 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     ).pipe(
       startWith({}),
       switchMap((evt: any) => {
-        console.log(evt);
         if (Array.isArray(evt)) {
           return this.transactionsService.currentTransactions$;
         }

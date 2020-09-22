@@ -132,16 +132,30 @@ export class TransactionsService {
         }
 
         filteredByQuery.sort((a, b) => {
-          if (a[filterOptions.sort.property] > b[filterOptions.sort.property]) {
-            return 1;
+          const firstValue = a[filterOptions.sort.property];
+          const secondValue = b[filterOptions.sort.property];
+
+          if (isNaN(firstValue) && isNaN(secondValue)) {
+            if (firstValue > secondValue) {
+              return 1;
+            }
+            if (firstValue < secondValue) {
+              return -1;
+            }
+            return 0;
+          } else {
+            if (filterOptions.sort.direction === 'desc') {
+              return secondValue - firstValue;
+            } else {
+              return firstValue - secondValue;
+            }
           }
-          if (a[filterOptions.sort.property] < b[filterOptions.sort.property]) {
-            return -1;
-          }
-          return 0;
         });
 
-        if (filterOptions.sort.direction === 'desc') {
+        if (
+          filterOptions.sort.direction === 'desc' &&
+          filterOptions.sort.property === 'merchant'
+        ) {
           filteredByQuery.reverse();
         }
 
