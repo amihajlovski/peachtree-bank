@@ -64,3 +64,13 @@
   }
 
 }
+
+@media only screen and (max-width: 576px) {
+  .filters {
+    flex-wrap: wrap;
+
+    .search {
+      width: 95% !important;
+    }
+  }
+}

@@ -49,3 +49,16 @@
     }
   }
 }
+
+@media only screen and (max-width: 720px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .item {
+    flex-wrap: wrap;
+    height: 100%;
+  }
+}
