@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { merge, Observable, ReplaySubject } from 'rxjs';
 import { startWith, switchMap, take, takeUntil } from 'rxjs/operators';
 import { IBalance } from 'src/app/models/balance';
+import { IFilter } from 'src/app/models/filter';
 import { IMerchant } from 'src/app/models/merchant';
 import { INewTransaction, ITransaction } from 'src/app/models/transaction';
 import { FiltersService } from 'src/app/services/filters.service';
@@ -41,11 +42,11 @@ export class TransactionsComponent implements OnInit, OnDestroy {
       this.filtersService.filter$
     ).pipe(
       startWith({}),
-      switchMap((evt: any) => {
-        if (Array.isArray(evt)) {
-          return this.transactionsService.currentTransactions$;
-        }
-        return this.transactionsService.filterTransactions(evt);
+      switchMap((evt: ITransaction[] | IFilter) => {
+        const filter = Array.isArray(evt)
+          ? this.filtersService.activeFilter
+          : evt;
+        return this.transactionsService.filterTransactions(filter);
       }),
       takeUntil(this.destroy$)
     );
