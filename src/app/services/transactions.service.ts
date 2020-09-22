@@ -100,13 +100,33 @@ export class TransactionsService {
               (currentBalance.amount - transaction.amount).toFixed(2)
             ),
           });
-          this.transactions.next([...currentTransactions, newTransaction]);
+          this.transactions.next([newTransaction, ...currentTransactions]);
 
           return of(true);
         }
 
         return of(false);
       })
+    );
+  }
+
+  filterTransactions(searchQuery: string): Observable<ITransaction[]> {
+    if (!searchQuery) {
+      return this.currentTransactions$;
+    }
+    return this.currentTransactions$.pipe(
+      map((transactions) =>
+        transactions.filter(
+          (transaction) =>
+            transaction.merchant
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            transaction.amount.includes(searchQuery) ||
+            transaction.transactionType
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
+        )
+      )
     );
   }
 }

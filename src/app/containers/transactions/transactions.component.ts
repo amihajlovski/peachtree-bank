@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { merge, Observable, of, ReplaySubject } from 'rxjs';
+import { startWith, switchMap, take, takeUntil } from 'rxjs/operators';
 import { IBalance } from 'src/app/models/balance';
 import { IMerchant } from 'src/app/models/merchant';
 import { INewTransaction, ITransaction } from 'src/app/models/transaction';
+import { FiltersService } from 'src/app/services/filters.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { ALLOWED_DEBT } from 'src/app/utils/constants';
 
@@ -21,7 +22,10 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
   public allowedDebt = ALLOWED_DEBT;
 
-  constructor(private transactionsService: TransactionsService) {}
+  constructor(
+    private transactionsService: TransactionsService,
+    private filtersService: FiltersService
+  ) {}
 
   ngOnInit(): void {
     this.balance$ = this.transactionsService.currentBalance$.pipe(
@@ -32,7 +36,21 @@ export class TransactionsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     );
 
-    this.transactions$ = this.transactionsService.currentTransactions$.pipe(
+    this.transactions$ = merge(
+      this.transactionsService.currentTransactions$,
+      this.filtersService.search$
+    ).pipe(
+      startWith({}),
+      switchMap((evt) => {
+        console.log(evt);
+        if (Array.isArray(evt)) {
+          return this.transactionsService.currentTransactions$;
+        }
+        if (typeof evt === 'string') {
+          return this.transactionsService.filterTransactions(evt);
+        }
+        return of([]);
+      }),
       takeUntil(this.destroy$)
     );
   }

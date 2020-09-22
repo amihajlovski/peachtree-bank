@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FiltersService } from 'src/app/services/filters.service';
 
 @Component({
   selector: 'app-transactions-filters',
@@ -6,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transactions-filters.component.scss'],
 })
 export class TransactionsFiltersComponent implements OnInit {
-  activeSearch: string;
+  activeSearch = '';
 
-  constructor() {}
+  constructor(private filtersService: FiltersService) {}
 
   ngOnInit(): void {}
 
-  applySearch(): void {}
+  applySearch(): void {
+    this.filtersService.setSearchQuery(this.activeSearch);
+  }
 }
