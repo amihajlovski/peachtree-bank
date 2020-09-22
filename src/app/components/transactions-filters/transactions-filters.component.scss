@@ -49,6 +49,10 @@
           border: 1px solid #e3e3e3;
           cursor: pointer;
 
+          div {
+            display: flex;
+          }
+
           p {
             font-size: 13px;
             font-weight: normal;

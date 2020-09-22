@@ -12,14 +12,26 @@
   <div class="sorting">
     <p class="label">Sort by</p>
     <div class="options">
-      <div class="option">
+      <div class="option" (click)="applySort('date')">
         <p>Date</p>
+        <div *ngIf="activeSort.property === 'date'">
+          <mat-icon *ngIf="activeSort.direction === 'desc'">arrow_drop_down</mat-icon>
+          <mat-icon *ngIf="activeSort.direction === 'asc'">arrow_drop_up</mat-icon>
+        </div>
       </div>
-      <div class="option">
+      <div class="option" (click)="applySort('merchant')">
         <p>Beneficiary</p>
+        <div *ngIf="activeSort.property === 'merchant'">
+          <mat-icon *ngIf="activeSort.direction === 'desc'">arrow_drop_down</mat-icon>
+          <mat-icon *ngIf="activeSort.direction === 'asc'">arrow_drop_up</mat-icon>
+        </div>
       </div>
-      <div class="option">
+      <div class="option" (click)="applySort('amount')">
         <p>Amount</p>
+        <div *ngIf="activeSort.property === 'amount'">
+          <mat-icon *ngIf="activeSort.direction === 'desc'">arrow_drop_down</mat-icon>
+          <mat-icon *ngIf="activeSort.direction === 'asc'">arrow_drop_up</mat-icon>
+        </div>
       </div>
     </div>
   </div>

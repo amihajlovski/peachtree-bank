@@ -12,6 +12,7 @@ import {
 } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IBalance, IBalanceRespone } from '../models/balance';
+import { IFilter } from '../models/filter';
 import { IMerchant } from '../models/merchant';
 import {
   INewTransaction,
@@ -110,23 +111,42 @@ export class TransactionsService {
     );
   }
 
-  filterTransactions(searchQuery: string): Observable<ITransaction[]> {
-    if (!searchQuery) {
-      return this.currentTransactions$;
-    }
+  filterTransactions(filterOptions: IFilter): Observable<ITransaction[]> {
     return this.currentTransactions$.pipe(
-      map((transactions) =>
-        transactions.filter(
-          (transaction) =>
-            transaction.merchant
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase()) ||
-            transaction.amount.includes(searchQuery) ||
-            transaction.transactionType
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())
-        )
-      )
+      map((transactions) => {
+        const filteredByQuery = !filterOptions?.search
+          ? transactions
+          : transactions.filter(
+              (transaction) =>
+                transaction.merchant
+                  .toLowerCase()
+                  .includes(filterOptions.search.toLowerCase()) ||
+                transaction.amount.includes(filterOptions.search) ||
+                transaction.transactionType
+                  .toLowerCase()
+                  .includes(filterOptions.search.toLowerCase())
+            );
+
+        if (!filterOptions?.sort) {
+          return filteredByQuery;
+        }
+
+        filteredByQuery.sort((a, b) => {
+          if (a[filterOptions.sort.property] > b[filterOptions.sort.property]) {
+            return 1;
+          }
+          if (a[filterOptions.sort.property] < b[filterOptions.sort.property]) {
+            return -1;
+          }
+          return 0;
+        });
+
+        if (filterOptions.sort.direction === 'desc') {
+          filteredByQuery.reverse();
+        }
+
+        return filteredByQuery;
+      })
     );
   }
 }
