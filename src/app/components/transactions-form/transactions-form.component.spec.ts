@@ -1,18 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TransferFormComponent } from './transactions-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TransactionsFormComponent } from './transactions-form.component';
 
 describe('TransactionsFormComponent', () => {
-  let component: TransferFormComponent;
-  let fixture: ComponentFixture<TransferFormComponent>;
+  let component: TransactionsFormComponent;
+  let fixture: ComponentFixture<TransactionsFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TransferFormComponent],
+      imports: [
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        NoopAnimationsModule,
+      ],
+      declarations: [TransactionsFormComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TransferFormComponent);
+    fixture = TestBed.createComponent(TransactionsFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
